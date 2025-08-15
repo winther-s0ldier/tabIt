@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tab Tracker Login</title>
+    <style>
+        body {
+            width: 300px;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #222;
+            color: #eee;
+        }
+
+        h2 {
+            text-align: center;
+            color: #eee;
+        }
+
+        .form-container {
+            background-color: #333;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .form-container h3 {
+            margin-top: 0;
+            color: #eee;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 93%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #555;
+            border-radius: 3px;
+            background-color: #444;
+            color: #eee;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #008000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .btn-group button {
+            width: 48%;
+            margin: 0;
+        }
+
+        #message {
+            margin-top: 10px;
+            color: red;
+            text-align: center;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-container input {
+            width: 85%;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 60%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 20px;
+            height: auto;
+        }
+
+        .password-container input {
+            width: calc(100% - 40px);
+            padding-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Tab Tracker</h2>
+
+    <div class="btn-group">
+        <button id="showLogin">Login</button>
+        <button id="showRegister">Register</button>
+    </div>
+
+    <div id="loginForm" class="form-container active">
+        <h3>Login</h3>
+        <input type="text" id="loginUsername" placeholder="Username" required>
+        <div class="password-container">
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <img src="images/eye-open.png" class="password-toggle" id="toggleLoginPassword" alt="Show Password">
+        </div>
+        <button id="loginBtn">Login</button>
+    </div>
+
+    <div id="registerForm" class="form-container">
+        <h3>Register</h3>
+        <input type="text" id="registerName" placeholder="Name" required>
+        <input type="text" id="registerUsername" placeholder="Username" required>
+        <div class="password-container">
+            <input type="password" id="registerPassword" placeholder="Password" required>
+            <img src="images/eye-open.png" class="password-toggle" id="toggleRegisterPassword" alt="Show Password">
+        </div>
+        <input type="email" id="registerEmail" placeholder="Email" required>
+        <button id="registerBtn">Register</button>
+    </div>
+
+    <div id="message"></div>
+
+    <script src="login.js"></script>
+</body>
+</html>

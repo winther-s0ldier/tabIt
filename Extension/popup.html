@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tab Tracker</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #222;
+            color: #eee;
+            width: 480px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #eee;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            background-color: #333;
+        }
+
+        th,
+        td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid #555;
+            color: #eee;
+            position: relative;
+        }
+
+        th {
+            background-color: #444;
+            font-weight: 500;
+        }
+
+        #userInfo {
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 5px;
+        }
+
+        #userInfo p {
+            margin: 5px 0;
+        }
+
+        #errorMessage {
+            color: #e53935;
+            margin-top: 10px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #008000;
+            border: none;
+            color: #eee;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #006000;
+        }
+
+        #logoutBtn {
+            background-color: #951a1a;
+        }
+
+        #logoutBtn:hover {
+            background-color: #8a0808;
+        }
+
+        .tab-title {
+            font-weight: 600;
+        }
+
+        .tab-cell {
+            position: relative;
+            cursor: pointer;
+            padding-right: 30px; /* Space for the delete icon */
+        }
+
+        .delete-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            background-image: url('images/remove.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .tab-cell:hover .delete-icon {
+            opacity: 1;
+        }
+
+        .tab-link {
+            color: #eee !important;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .tab-link:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body id="popupBody">
+    <div id="userInfo"></div>
+    <h2>Last 5 Tracked Tabs</h2>
+    <div class="buttons-container">
+        <button id="refreshTabs">Refresh Tabs</button>
+        <button id="logoutBtn">Logout</button>
+        <button id="viewAllTabsBtn">View All Tabs</button>
+    </div>
+    <div id="errorMessage"></div>
+    <table id="tabTable">
+        <thead>
+            <tr>
+                <th class="tab-title">Tab Title</th>
+                <th>Browser</th>
+                <th>Last Opened</th>
+            </tr>
+        </thead>
+        <tbody id="tabTableBody">
+        </tbody>
+    </table>
+    <script src="popup.js"></script>
+</body>
+</html>

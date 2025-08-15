@@ -1,0 +1,42 @@
+{
+    "manifest_version": 3,
+    "name": "TABit",
+    "version": "1.0",
+    "description": "Saves and tracks browser tab information",
+    "permissions": [
+        "tabs",
+        "storage",
+        "activeTab",
+        "cookies"
+    ],
+    "host_permissions": [
+        "http://localhost:5000/*",
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "tabtracker@example.com"
+        }
+    },
+    "action": {
+        "default_popup": "popup.html"
+    },
+"web_accessible_resources": [
+    {
+        "resources": [
+            "popup.html",
+            "webpage.html",
+            "images/eye-open.png",
+            "images/eye-closed.png",
+            "images/remove.png"
+        ],
+        "matches": [
+            "<all_urls>"
+        ]
+    }
+]
+}

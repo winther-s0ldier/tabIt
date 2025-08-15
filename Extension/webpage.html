@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Tabs</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #121212;
+            color: #eee;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #eee;
+            margin-bottom: 10px;
+        }
+
+        #userInfo {
+            padding: 15px 20px;
+            background-color: #282828;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+        }
+
+        #userInfo p {
+            margin: 5px 0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        #searchBox {
+            width: calc(50% - 40px);
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #333;
+            color: #eee;
+            margin: 0 auto 20px auto;
+            display: block;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        #refreshTabs {
+            background-color: #008000;
+            color: #eee;
+        }
+
+        #refreshTabs:hover {
+            background-color: #006000;
+        }
+
+        .action-btn {
+            display: none;
+            color: #eee;
+            padding: 10px 20px;
+            margin: 0 5px;
+        }
+
+        .action-btn.edit {
+            background-color: #2196F3;
+        }
+
+        .action-btn.edit:hover {
+            background-color: #1976D2;
+        }
+
+        .action-btn.delete {
+            background-color: #f44336;
+        }
+
+        .action-btn.delete:hover {
+            background-color: #d32f2f;
+        }
+
+        #logoutBtn {
+            background-color: #951a1a;
+            color: #eee;
+        }
+
+        #logoutBtn:hover {
+            background-color: #8a0808;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            background-color: #222;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+
+        th {
+            background-color: #282828;
+            font-weight: 600;
+        }
+
+        td {
+            background-color: #222;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-checkbox {
+            width: 18px;
+            height: 18px;
+            background-color: #444;
+            border-radius: 3px;
+            border: 2px solid #666;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .custom-checkbox.checked {
+            background-color: #2196F3;
+            border-color: #2196F3;
+        }
+
+        .custom-checkbox.checked::after {
+            content: '✓';
+            color: white;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+        }
+
+        .title-cell {
+            position: relative;
+        }
+
+.title-cell .icon {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    background-image: url('images/remove.png');  /* Updated path */
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+        .title-cell:hover .icon {
+            opacity: 1;
+        }
+
+        .editable-title {
+            background: none;
+            border: none;
+            color: #eee;
+            font-size: inherit;
+            font-family: inherit;
+            padding: 2px 5px;
+            width: calc(100% - 30px);
+        }
+
+        .editable-title:focus {
+            background-color: #444;
+            outline: none;
+            border-radius: 3px;
+        }
+
+        .truncate {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 250px;
+        }
+
+        .text-blue-600 {
+            color: #66a3ff;
+        }
+
+        .text-blue-600:hover {
+            text-decoration: underline;
+        }
+
+        #errorMessage {
+            color: #e53935;
+            margin-top: 15px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="userInfo"></div>
+        <div class="header">
+            <h1>All Tracked Tabs</h1>
+            <input type="text" id="searchBox" placeholder="Search by title or URL..." class="border p-2 rounded">
+        </div>
+        <div class="button-container">
+            <button id="refreshTabs">
+                Refresh Tabs
+            </button>
+            <button id="editBtn" class="action-btn edit">
+                Edit
+            </button>
+            <button id="deleteBtn" class="action-btn delete">
+                Delete
+            </button>
+            <button id="logoutBtn">
+                Logout
+            </button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 w-10"></th>
+                    <th class="px-4 py-2">#</th>
+                    <th class="px-4 py-2">Title</th>
+                    <th class="px-4 py-2">URL</th>
+                    <th class="px-4 py-2">Browser</th>
+                    <th class="px-4 py-2">First Opened</th>
+                    <th class="px-4 py-2">Last Opened</th>
+                </tr>
+            </thead>
+            <tbody id="tabsTableBody">
+                <!-- Tabs will be inserted here -->
+            </tbody>
+        </table>
+        <div id="errorMessage" class="mt-4"></div>
+    </div>
+
+    <script type="module" src="webpage.js"></script>
+</body>
+</html>

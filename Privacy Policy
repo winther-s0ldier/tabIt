@@ -1,0 +1,58 @@
+Privacy Policy for TABit
+
+Effective Date: 22/12/24
+
+Introduction
+
+TABit ("we," "our," or "us") respects your privacy and is committed to protecting the personal information you share with us. This Privacy Policy explains how we collect, use, and safeguard your information when you use the TABit browser extension ("Extension"). By using TABit, you agree to the terms outlined in this Privacy Policy.
+
+Information We Collect
+
+TABit collects data necessary for the extension’s functionality, which is securely stored in a database associated with your user account. Specifically:
+
+1. Tab History:
+   - TABit stores information about the tabs you open, such as URLs and tab titles, to provide you with a summary of your browsing activity.
+   - This data is stored in a secure MongoDB database linked to your TABit account.
+
+What We Do Not Collect
+
+- Personal Identifiable Information (PII) unrelated to account creation and management.
+- Any data unrelated to the functionality of the extension.
+
+How We Use Information
+
+The information collected is used solely to provide and improve the core functionalities of the TABit extension, including:
+
+- Tracking and managing your tab history.
+
+Data Storage and Security
+
+- All collected data is securely stored in a MongoDB database associated with your account.
+- We implement industry-standard security measures to protect your data from unauthorized access or disclosure.
+
+Third-Party Services
+
+TABit does not share or sell your data to any third-party service providers.
+
+User Control
+
+You maintain full control over your data:
+
+- You can delete your tab history at any time through the extension settings.
+- Account deletion requests will result in the permanent removal of your data from our servers.
+
+Changes to This Privacy Policy
+
+We may update this Privacy Policy from time to time to reflect changes in our practices or for legal reasons. Any updates will be posted here with the effective date. Continued use of TABit after updates signifies your acceptance of the revised policy.
+
+Contact Us
+
+If you have any questions or concerns about this Privacy Policy or TABit's data practices, please contact us at:
+
+- Email 1: apurvamalasi@gmail.com
+- Email 2: rudrakumar1612@gmail.com
+
+Acknowledgment
+
+By using TABit, you acknowledge that you have read and understood this Privacy Policy and agree to its terms.
+

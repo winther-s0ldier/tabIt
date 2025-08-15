@@ -1,0 +1,59 @@
+# Node Modules
+node_modules/
+
+# Python Virtual Environment
+venv/
+env/
+
+# Compiled Python Files
+__pycache__/
+*.pyc
+*.pyo
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+
+# macOS System Files
+.DS_Store
+
+# Windows System Files
+Thumbs.db
+
+# Configuration files with secrets (example)
+config.py
+
+# Environment variable files
+.env
+
+# IDE/Editor Specific Files
+.idea/
+.vscode/
+
+# Log files
+*.log
+
+# Database files (if using SQLite)
+db.sqlite3
+db.sqlite3-journal
+
+# Flask specific
+instance/
+.webassets-cache
+
+# Extension specific (if you have an output or build folder)
+# Extension/build/ 
+# Extension/dist/ 
+
+# Jupyter Notebook (if applicable)
+.ipynb_checkpoints
+
+# IPython (if applicable)
+profile_default/
+ipython_config.py
+
+# Celery stuff (if applicable)
+celerybeat-schedule
+celerybeat.pid
