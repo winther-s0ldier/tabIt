@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if (data.token) {
-                const tokenExpiration = Date.now() + 3 * 30 * 24 * 60 * 60 * 1000; // 3 months
+                const tokenExpiration = Date.now() + 3 * 30 * 24 * 60 * 60 * 1000;
 
                 if (chrome?.storage?.local) {
                     await new Promise((resolve, reject) => {
@@ -128,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Event Listeners
     showLoginBtn.addEventListener('click', showLoginForm);
     showRegisterBtn.addEventListener('click', showRegisterForm);
 

@@ -261,25 +261,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         tabs.forEach((tab, index) => {
             const row = tabsTableBody.insertRow();
 
-            // Checkbox
             const checkboxCell = row.insertCell();
             const checkbox = document.createElement('div');
             checkbox.className = 'custom-checkbox';
             checkbox.addEventListener('click', () => handleCheckboxClick(tab.url, checkbox));
             checkboxCell.appendChild(checkbox);
 
-            // Index
             const indexCell = row.insertCell();
             indexCell.className = 'border p-2';
             indexCell.textContent = index + 1;
 
-            // Title
             const titleCell = row.insertCell();
             titleCell.className = 'border p-2 truncate max-w-xs';
             titleCell.textContent = formatPageTitle(tab.title, tab.url);
             titleCell.setAttribute('data-url', tab.url);
 
-            // URL
             const urlCell = row.insertCell();
             urlCell.className = 'border p-2 truncate max-w-xs';
             const urlLink = document.createElement('a');
@@ -302,17 +298,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
             urlCell.appendChild(urlLink);
 
-            // Browser
             const browserCell = row.insertCell();
             browserCell.className = 'border p-2';
             browserCell.textContent = tab.browser || 'Unknown';
 
-            // First Opened
             const firstOpenedCell = row.insertCell();
             firstOpenedCell.className = 'border p-2';
             firstOpenedCell.textContent = formatDate(tab.first_opened);
 
-            // Last Opened
             const lastOpenedCell = row.insertCell();
             lastOpenedCell.className = 'border p-2';
             lastOpenedCell.textContent = formatDate(tab.last_opened);
@@ -339,7 +332,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Event Listeners
     refreshButton.addEventListener('click', refreshTabs);
 
     searchBox.addEventListener('input', () => {
@@ -370,6 +362,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // Initial load
     refreshTabs();
 });

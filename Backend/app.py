@@ -11,7 +11,6 @@ import os
 from datetime import datetime, timedelta
 from bson.objectid import ObjectId
 
-# Set the secret key and MongoDB URI from environment variables
 secret_key = os.environ.get('SECRET_KEY', secrets.token_urlsafe(64))
 mongo_uri = os.environ.get('MONGO_URI', 'mongodb://localhost:27017/')
 
@@ -20,17 +19,14 @@ app.config['SECRET_KEY'] = secret_key
 app.config['MONGO_URI'] = mongo_uri
 app.config['MONGO_DBNAME'] = 'browser_tab_tracker'
 
-# Improved CORS configuration
 ALLOWED_ORIGINS = [
     "http://localhost:63342",
     f"chrome-extension://{os.environ.get('CHROME_EXTENSION_ID', '')}"
 ]
 flask_cors.CORS(app, resources={r"/*": {"origins": ALLOWED_ORIGINS}})
 
-# Register the authentication blueprint
 app.register_blueprint(auth_bp, url_prefix='/auth')
 
-# Use the database functions for connection management
 app.teardown_appcontext(close_db)
 
 def token_required(f):
@@ -47,7 +43,6 @@ def token_required(f):
                 data = jwt.decode(session_token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
                 current_user_id = data['user_id']
 
-                # Verify user existence
                 db = get_db()
                 user = db.users.find_one({'_id': ObjectId(current_user_id)})
                 if not user:

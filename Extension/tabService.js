@@ -11,22 +11,20 @@ class TabService {
     }
 
     async checkTokenExpiration() {
-        // Check token expiration every hour
         setInterval(async () => {
             const tokenData = await this.getStoredTokenData();
             if (tokenData && this.isTokenNearingExpiration(tokenData.tokenExpiration)) {
                 this.showRevalidationDialog();
             }
-        }, 60 * 60 * 1000); // Check every hour
+        }, 60 * 60 * 1000);
     }
 
     isTokenNearingExpiration(expirationTime) {
-        const warningThreshold = 7 * 24 * 60 * 60 * 1000; // 7 days before expiration
+        const warningThreshold = 7 * 24 * 60 * 60 * 1000;
         return (expirationTime - Date.now()) <= warningThreshold;
     }
 
     async showRevalidationDialog() {
-        // Create and show modal dialog
         const modal = document.createElement('div');
         modal.innerHTML = `
             <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -67,7 +65,6 @@ class TabService {
                     await this.updateToken(data.token, data.tokenExpiration);
                     modal.remove();
                 } else {
-                    // Show error message
                     document.getElementById('revalidatePassword').classList.add('border-red-500');
                 }
             } catch (error) {
