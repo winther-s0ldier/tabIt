@@ -1,4 +1,3 @@
-// Set up error handling for unhandled promises
 self.addEventListener('unhandledrejection', function(event) {
     console.error('Unhandled promise rejection:', event.reason);
 });
@@ -7,7 +6,7 @@ let tabTracker = {
     apiEndpoint: 'http://localhost:5000/save_tab',
     openTabs: new Map(),
     activeTabId: null,
-    lastSavedUrls: new Map(), // Track last saved URLs to prevent duplicates
+    lastSavedUrls: new Map(),
 
     extractTabInfo: function (tab) {
         if (!tab.url || !this.shouldTrackTab(tab)) {
@@ -73,12 +72,10 @@ let tabTracker = {
 
     shouldTrackTab: function(tab) {
         try {
-            // Basic validation
             if (!tab || !tab.url) {
                 return false;
             }
 
-            // Excluded URL patterns
             const excludePatterns = [
                 'chrome://',
                 'chrome-extension://',
@@ -89,18 +86,15 @@ let tabTracker = {
                 'edge://newtab'
             ];
 
-            // Check if URL matches any excluded pattern
             if (excludePatterns.some(pattern => tab.url.startsWith(pattern))) {
                 return false;
             }
 
-            // Check if URL is different from last saved
             const lastUrl = this.lastSavedUrls.get(tab.id);
             if (lastUrl === tab.url) {
                 return false;
             }
 
-            // Additional validation
             const isValidUrl = tab.url.includes('://') &&
                              !tab.url.includes('chrome://') &&
                              !tab.url.includes('chrome-extension://');
@@ -143,7 +137,6 @@ let tabTracker = {
                 throw new Error(`Failed to save tab. Status: ${response.status}, Response: ${errorText}`);
             }
 
-            // Update last saved URL only after successful save
             this.lastSavedUrls.set(tab.id, tab.url);
             console.log('Tab saved successfully:', tabInfo.url);
 
@@ -170,7 +163,6 @@ let tabTracker = {
 
     handleTabUpdate: async function(tabId, changeInfo, tab) {
         try {
-            // Only track when URL changes and page is complete
             if (changeInfo.status === 'complete' && tab.url && this.shouldTrackTab(tab)) {
                 this.openTabs.set(tabId, tab.url);
                 await this.saveTabInfo(tab);
@@ -188,22 +180,18 @@ let tabTracker = {
     initializeTracking: async function () {
         console.log('Initializing tab tracking...');
 
-        // Track URL changes
         chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             this.handleTabUpdate(tabId, changeInfo, tab);
         });
 
-        // Track active tab changes
         chrome.tabs.onActivated.addListener((activeInfo) => {
             this.handleTabActivation(activeInfo);
         });
 
-        // Clean up removed tabs
         chrome.tabs.onRemoved.addListener((tabId) => {
             this.handleTabRemoval(tabId);
         });
 
-        // Initialize with current active tab
         try {
             const [activeTab] = await chrome.tabs.query({active: true, currentWindow: true});
             if (activeTab) {
@@ -215,7 +203,6 @@ let tabTracker = {
     }
 };
 
-// Initialize tracking with error handling
 console.log('Starting tab tracker...');
 tabTracker.initializeTracking().catch(error => {
     console.error('Failed to initialize tab tracking:', error);

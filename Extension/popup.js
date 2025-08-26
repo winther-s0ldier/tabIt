@@ -170,7 +170,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 for (const tab of lastFiveTabs) {
                     const row = tabTableBody.insertRow();
 
-                    // Title cell with delete icon
                     const titleCell = row.insertCell();
                     titleCell.className = 'tab-cell';
 
@@ -202,11 +201,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                         }
                     });
 
-                    // Browser cell
                     const browserCell = row.insertCell();
                     browserCell.textContent = tab.browser || 'Unknown';
 
-                    // Last opened cell
                     const lastOpenedCell = row.insertCell();
                     lastOpenedCell.textContent = formatDateTime(tab.last_opened);
                 }
@@ -297,6 +294,5 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     logoutBtn.addEventListener('click', logout);
 
-    // Initial setup
     checkLoginStatus();
 });

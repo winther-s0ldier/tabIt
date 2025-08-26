@@ -38,7 +38,6 @@ def login():
     if user:
         update_last_login(user['_id'])
 
-        # Session token valid for 3 months
         session_expiration = datetime.utcnow() + timedelta(days=90)
         session_token = jwt.encode({
             'user_id': str(user['_id']),
@@ -67,7 +66,6 @@ def revalidate():
     user = db.users.find_one({'_id': ObjectId(user_id)})
 
     if user and bcrypt.checkpw(password.encode('utf-8'), user['password']):
-        # Extend the session token for another 3 months
         session_expiration = datetime.utcnow() + timedelta(days=90)
         session_token = jwt.encode({
             'user_id': str(user['_id']),
